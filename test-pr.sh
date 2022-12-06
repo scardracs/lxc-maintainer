@@ -17,8 +17,6 @@
 #   test-pr.sh 12345
 #
 
-TESTING="tester-${prId}"
-
 if [[ -z ${1} ]]; then
 	echo "Please insert a GitHub PR number!"
 	echo "https://github.com/gentoo/gentoo/pull/<this_one>"
@@ -41,6 +39,8 @@ main() {
 		esac
 		shift
 	done
+
+	TESTING="tester-${prId}"
 
 	echo "Initializing new test environment... this will take a while."
 	lxc copy tester "${TESTING}"
