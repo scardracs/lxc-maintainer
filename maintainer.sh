@@ -5,7 +5,7 @@ MACHINE="tester"
 # Adjust to your needs.
 lxc stop "${MACHINE}" || /bin/true
 lxc start "${MACHINE}"
-lxc exec "${MACHINE}" -- su -lc "(sleep 10 && cd ~/lxd-bin && git pull)"
+lxc exec "${MACHINE}" -- su -lc "(sleep 1 && cd ~/lxd-bin && git pull)"
 lxc exec "${MACHINE}" -- su -lc "emerge --sync"
 lxc exec "${MACHINE}" -- su -lc "emerge -uvDN --binpkg-changed-deps=y --keep-going @world"
 lxc exec "${MACHINE}" -- su -lc "emerge -uvDN --depclean"

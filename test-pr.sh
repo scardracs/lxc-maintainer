@@ -45,12 +45,12 @@ main() {
 	echo "Initializing new test environment... this will take a while."
 	lxc copy tester "${TESTING}"
 	lxc start "${TESTING}"
-	lxc exec "${TESTING}" -- su -lc "(sleep 10 && cd /var/db/repos/gentoo && curl -s -L https://patch-diff.githubusercontent.com/raw/gentoo/gentoo/pull/${prId}.patch | git -c user.email=mscardovi@icloud.com -c user.name='Marco Scardovi' am --keep-cr -3)"
+	lxc exec "${TESTING}" -- su -lc "(sleep 1 && cd /var/db/repos/gentoo && curl -s -L https://patch-diff.githubusercontent.com/raw/gentoo/gentoo/pull/${prId}.patch | git -c user.email=mscardovi@icloud.com -c user.name='Marco Scardovi' am --keep-cr -3)"
 
 	if [[ -z "${run}" ]]; then
 		echo "INFO: Doing the default test runs."
-		lxc exec "${TESTING}" -- su -lc "(sleep 10 && sed -i -e 's/--max-use-combinations 6/--max-use-combinations 1/g' /root/lxd-bin/container/bin/prtester.sh)"
-		lxc exec "${TESTING}" -- su -lc "(sleep 10 && ~/lxd-bin/container/bin/prtester.sh)"
+		lxc exec "${TESTING}" -- su -lc "(sleep 1 && sed -i -e 's/--max-use-combinations 6/--max-use-combinations 1/g' /root/lxd-bin/container/bin/prtester.sh)"
+		lxc exec "${TESTING}" -- su -lc "(sleep 1 && ~/lxd-bin/container/bin/prtester.sh)"
 		lxc exec "${TESTING}" -- su -lc "(~/lxd-bin/container/bin/errors_and_qa_notices.sh)"
 		lxc exec "${TESTING}" bash
 
@@ -64,7 +64,7 @@ main() {
 
 	fi
 
-	lxc exec "${TESTING}" -- su -lc "(sleep 10 && pfl &>/dev/null)"
+	lxc exec "${TESTING}" -- su -lc "(sleep 1 && pfl &>/dev/null)"
 	lxc stop "${TESTING}"
 }
 
