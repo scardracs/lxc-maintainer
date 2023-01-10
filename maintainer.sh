@@ -12,7 +12,7 @@ lxc exec "${MACHINE}" -- su -lc "emerge -uvDN --depclean"
 lxc exec "${MACHINE}" -- su -lc "eclean-kernel -n 1"
 lxc exec "${MACHINE}" -- su -lc "(eselect news read && etc-update)"
 lxc exec "${MACHINE}" -- su -lc "pfl"
-lxc exec "${MACHINE}" -- su -lc "eclean packages --changed-deps"
+lxc exec "${MACHINE}" -- su -lc "eclean-pkg -d && eclean-dist -d"
 lxc stop "${MACHINE}"
 
 # Delete all old snapshots. Note that this will NOT delete active containers!
